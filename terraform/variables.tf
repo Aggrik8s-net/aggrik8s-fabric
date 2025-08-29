@@ -29,3 +29,13 @@ variable "routeros_devices" {
     }
   }
 }
+
+# Define a variable so we can pass in our token
+variable "doppler_token" {
+  type = string
+  description = "A token to authenticate with Doppler for the dev config"
+}
+variable "doppler_token_dev-fabric" {
+  type = string
+  description = "A token to authenticate with Doppler for the dev config"
+}
