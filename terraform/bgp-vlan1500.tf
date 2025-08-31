@@ -52,9 +52,13 @@ resource "routeros_routing_bgp_connection" "vlan1500" {
   name           = "vlan1500"
   as             = 65001
   router_id      = cidrhost(local.vlan1500_gw, 2)
+  local {
+    role         = "ibgp"
+
+  }
   remote {
-    address = cidrhost(local.vlan2000_gw, 3)
-    as      = 65002
+    address      = cidrhost(local.vlan2000_gw, 3)
+    as           = 65002
   }
   // remote_as      = 65002
   address_families = "ip"
