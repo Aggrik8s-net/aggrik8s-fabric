@@ -34,4 +34,5 @@ variable "routeros_devices" {
 variable "doppler_token_fabric_dev" {
   type = string
   description = "A token to authenticate with Doppler for the dev config"
+  sensitive = true
 }
