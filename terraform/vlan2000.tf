@@ -194,3 +194,21 @@ resource "routeros_ip_dhcp_server_lease" "vlan2000_macbook-pro" {
   server      = routeros_ip_dhcp_server.vlan2000.name
   comment     = "Terraformed static lease."
 }
+
+# Define an address list for BGP peers.
+# This makes the firewall rule more maintainable.
+resource "routeros_ip_address_list" "bgp_peers_vlan2000" {
+  name    = "bgp_peers_vlan2000"
+  address = "192.168.88.2" # Replace with the actual IP address of your BGP peer.
+  comment = "Address list for BGP peers"
+}
+
+# Create a firewall filter rule to accept incoming BGP connections.
+resource "routeros_ip_firewall_filter" "allow_bgp_in_vlan2000" {
+  action        = "accept"
+  chain         = "input"
+  comment       = "Allow incoming BGP connections"
+  protocol      = "tcp"
+  dst_port      = "179"
+  src_address_list = routeros_ip_address_list.bgp_peers_vlan2000.name
+}
