@@ -1,7 +1,8 @@
 terraform {
   required_providers {
-    routeros = {
-      source = "terraform-routeros/routeros"
+    routeros  = {
+      source  = "terraform-routeros/routeros"
+      // version = "7.20rc1"
     }
     doppler = {
       source = "DopplerHQ/doppler"
@@ -57,8 +58,8 @@ provider "routeros" {
 
 
 provider "routeros" {
-  alias = "crs305-01"
-  // host  = "192.168.10.4"
+  alias          = "crs305-01"
+// host  = "192.168.10.4"
   hosturl        = "https://192.168.88.4"        # env ROS_HOSTURL or MIKROTIK_HOST
   username       = "admin"                       # env ROS_USERNAME or MIKROTIK_USER
   password       = data.doppler_secrets.this.map.FABRIC_PASSWORD  # RouterOS Password
