@@ -42,39 +42,30 @@ resource "routeros_routing_bgp_network" "talos_east_network" {
 # BGP configuration
 resource "routeros_routing_bgp_template" "template_vlan1500" {
   provider = routeros.rb5009-01
-  name = "vlan1500"
   as   = 65001 # Define a private ASN
-  router_id =  cidrhost(local.vlan1500_gw, 2)
+  name = "vlan1500"
+  # router_id =  cidrhost(local.vlan1500_gw, 2)
+  router_id =  "192.168.88.2"
 }
 
 resource "routeros_routing_bgp_connection" "vlan1500" {
   provider       = routeros.rb5009-01
   name           = "vlan1500"
   as             = 65001
-  router_id      = cidrhost(local.vlan1500_gw, 2)
+  # router_id      = cidrhost(local.vlan1500_gw, 2)
+  router_id      = "192.168.88.2"
+
   local {
     role         = "ibgp"
 
   }
   remote {
-    address      = cidrhost(local.vlan2000_gw, 3)
-    as           = 65002
+    # address      = cidrhost(local.vlan2000_gw, 3)
+    address      = "192.168.88.3"
+    as           = 65001
   }
   // remote_as      = 65002
   address_families = "ip"
   keepalive_time = "10s"
   hold_time      = "30s"
-  // local_address  =  cidrhost(local.vlan1500_gw, 2)
 }
-/*
-# BGP network advertisement
-resource "routeros_routing_bgp_network" "vlan1500_te" {
-  provider       = routeros.rb5009-01
-  network = cidrnetmask(local.vlan1500_gw)
-}
-
-resource "routeros_routing_bgp_network" "vlan2000_te" {
-  provider       = routeros.rb5009-01
-  network = cidrnetmask(local.vlan2000_gw)
-}
-*/

@@ -5,6 +5,7 @@ locals {
   vlan2000_id    = 2000
   vlan2000_gw    = "192.168.20.3/24"
   bgp_peer_ip_te = "192.168.88.2"
+
 }
 
 # Add a comment to the router for identification
@@ -71,44 +72,29 @@ resource "routeros_routing_bgp_network" "talos_west_network" {
 resource "routeros_routing_bgp_template" "template_vlan2000" {
   provider = routeros.rb5009-02
   name = "vlan2000"
-  as   = 65002 # Define a private ASN
-  router_id = cidrhost(local.vlan2000_gw, 3)
+  as   = 65001 # Define a private ASN
+  //router_id = cidrhost(local.vlan2000_gw, 3)
+  router_id = "192.168.88.3"
 }
-
+resource "routeros_routing_bgp_instance" "vlan2000" {
+  provider = routeros.rb5009-02
+}
 resource "routeros_routing_bgp_connection" "vlan2000" {
   provider       = routeros.rb5009-02
   name           = "vlan2000"
-  as             = 65002
-  router_id      = cidrhost(local.vlan2000_gw, 3)
+  as             = 65001
+  # router_id      = cidrhost(local.vlan2000_gw, 3)
+  router_id      = "192.168.88.3"
   local {
     role         = "ibgp"
   }
   remote {
-    address      = cidrhost(local.vlan1500_gw, 2)
+    # address      = cidrhost(local.vlan1500_gw, 2)
+    address      = "192.168.88.2"
     as           = 65001
   }
 
-  // remote_as      = 65001
   address_families = "ip"
   keepalive_time = "10s"
   hold_time      = "30s"
-  // local_address  =  cidrhost(local.vlan2000_gw, 3)
 }
-
-/*
-//
-// Not available in v1.86.3 ...
-//
-// This is now set by routeros_routing_bgp_connection
-//
-# BGP network advertisement
-resource " c" "vlan1500_tw" {
-  provider       = routeros.rb5009-02
-  network = cidrnetmask(local.vlan1500_gw)
-}
-
-resource "routeros_routing_bgp_network" "vlan2000_tw" {
-  provider       = routeros.rb5009-02
-  network = cidrnetmask(local.vlan2000_gw)
-}
-*/
