@@ -119,3 +119,20 @@ resource "routeros_ip_dhcp_server_lease" "vlan1_macbook-pro" {
   server      = routeros_ip_dhcp_server.vlan1.name
   comment     = "Terraformed static lease."
 }
+
+//
+//
+//
+resource "routeros_system_certificate" "letsencrypt_rb5009-01" {
+  provider    = routeros.rb5009-01
+  // acme_ssl_certificate {}
+  common_name = "aggrik8s.net"
+  name        = "aggrik8s.net"
+}
+
+resource "routeros_system_certificate" "letsencrypt_rb5009-02" {
+  provider    = routeros.rb5009-02
+  // acme_ssl_certificate {}
+  common_name = "aggrik8s.net"
+  name        = "aggrik8s.net"
+}
