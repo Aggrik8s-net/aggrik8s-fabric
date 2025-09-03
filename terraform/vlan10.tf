@@ -1,4 +1,7 @@
-
+// import {
+//  to = routeros_ip_dhcp_server_network.vlan10
+//  id = "*8"
+// }
 resource "routeros_ip_dhcp_server_network" "vlan10" {
   provider = routeros.crs328-01
   address    = "192.168.10.0/24"
