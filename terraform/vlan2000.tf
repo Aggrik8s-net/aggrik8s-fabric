@@ -36,65 +36,6 @@ resource "routeros_ip_dhcp_server" "vlan2000" {
 //   interface = routeros_interface_bridge.rb5009-01.name
 //   comment = "Talos West (TF)"
 // }
-
-resource "routeros_interface_vlan" "rb5009-02_vlan-2000" {
-  provider = routeros.rb5009-02
-  name      = "VLAN2000"
-  vlan_id   = 2000
-  interface = routeros_interface_bridge.rb5009-02.name
-  comment = "Talos West (TF)"
-}
-
-// resource "routeros_interface_vlan" "crs305-01_vlan-2000" {
-//   provider = routeros.crs305-01
-//   name      = "VLAN2000"
-//   vlan_id   = 2000
-//   interface = routeros_interface_bridge.crs305-01.name
-//   comment = "Talos West (TF)"
-// }
-
-// resource "routeros_interface_vlan" "crs328-01_vlan-2000" {
-//   provider = routeros.crs328-01
-//   name      = "VLAN2000"
-//   vlan_id   = 2000
-//   interface = routeros_interface_bridge.crs328-01.name
-//   comment = "Talos West (TF)"
-// }
-
-//
-//  Set up bridge ports including VLAN tagged and untagged ports
-// resource "routeros_interface_bridge_vlan" "vlan2000_rb5009-01" {
-//   provider   = routeros.rb5009-01
-//   bridge     = routeros_interface_bridge.rb5009-01.name
-//   vlan_ids   = [routeros_interface_vlan.rb5009-01_vlan-2000.vlan_id]
-//   tagged     = [routeros_interface_vlan.rb5009-01_vlan-2000.interface, "ether2", "ether4", "sfp-sfpplus1"]
-//   untagged   = []        # Example port
-// }
-
-resource "routeros_interface_bridge_vlan" "vlan2000_rb5009-02" {
-  provider   = routeros.rb5009-02
-  bridge     = routeros_interface_bridge.rb5009-02.name
-  vlan_ids   = [routeros_interface_vlan.rb5009-02_vlan-2000.vlan_id]
-  tagged     = [routeros_interface_vlan.rb5009-02_vlan-2000.interface, "ether2", "ether4", "sfp-sfpplus1"]
-  untagged   = ["ether5", "ether6", "ether7", "ether8"]        # Example port
-}
-
-// resource "routeros_interface_bridge_vlan" "vlan2000_crs305-01" {
-//   provider   = routeros.crs305-01
-//   bridge     = routeros_interface_bridge.crs305-01.name
-//   vlan_ids   = [routeros_interface_vlan.crs305-01_vlan-2000.vlan_id]
-//   tagged     = [routeros_interface_vlan.crs305-01_vlan-2000.interface, "sfp-sfpplus1", "sfp-sfpplus2", "sfp-sfpplus3"]
-//   untagged   = []        # Example port
-// }
-
-// resource "routeros_interface_bridge_vlan" "vlan2000_crs328-01" {
-//   provider   = routeros.crs328-01
-//   bridge     = routeros_interface_bridge.crs328-01.name
-//   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-2000.vlan_id]
-//   tagged     = [routeros_interface_vlan.crs328-01_vlan-2000.interface, "ether8", "ether18", "ether22", "sfp-sfpplus1",  "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
-//   untagged   = ["ether7", "ether17"]        # Example port
-// }
-
 //
 //
 //
@@ -108,6 +49,57 @@ resource "routeros_interface_bridge_vlan" "vlan2000_rb5009-02" {
 //   hw                = true
 //   comment           = "Talos West (TF)"
 // }
+
+resource "routeros_interface_vlan" "rb5009-02_vlan-2000" {
+  provider = routeros.rb5009-02
+  name      = "VLAN2000"
+  vlan_id   = 2000
+  interface = routeros_interface_bridge.rb5009-02.name
+  comment = "Talos West (TF)"
+}
+
+resource "routeros_interface_vlan" "crs305-01_vlan-2000" {
+  provider = routeros.crs305-01
+  name      = "VLAN2000"
+  vlan_id   = 2000
+  interface = routeros_interface_bridge.crs305-01.name
+  comment = "Talos West (TF)"
+}
+
+resource "routeros_interface_vlan" "crs328-01_vlan-2000" {
+  provider = routeros.crs328-01
+  name      = "VLAN2000"
+  vlan_id   = 2000
+  interface = routeros_interface_bridge.crs328-01.name
+  comment = "Talos West (TF)"
+}
+
+
+resource "routeros_interface_bridge_vlan" "vlan2000_rb5009-02" {
+  provider   = routeros.rb5009-02
+  bridge     = routeros_interface_bridge.rb5009-02.name
+  vlan_ids   = [routeros_interface_vlan.rb5009-02_vlan-2000.vlan_id]
+  tagged     = [routeros_interface_vlan.rb5009-02_vlan-2000.interface, "ether2", "ether4", "sfp-sfpplus1"]
+  untagged   = ["ether5", "ether6", "ether7", "ether8"]        # Example port
+}
+
+resource "routeros_interface_bridge_vlan" "vlan2000_crs305-01" {
+  provider   = routeros.crs305-01
+  bridge     = routeros_interface_bridge.crs305-01.name
+  vlan_ids   = [routeros_interface_vlan.crs305-01_vlan-2000.vlan_id]
+  tagged     = [routeros_interface_vlan.crs305-01_vlan-2000.interface, "sfp-sfpplus1", "sfp-sfpplus2", "sfp-sfpplus3"]
+  untagged   = []        # Example port
+}
+
+resource "routeros_interface_bridge_vlan" "vlan2000_crs328-01" {
+  provider   = routeros.crs328-01
+  bridge     = routeros_interface_bridge.crs328-01.name
+  vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-2000.vlan_id]
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-2000.interface, "ether8", "ether18", "ether22", "sfp-sfpplus1",  "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
+  untagged   = ["ether7", "ether17"]        # Example port
+}
+
+
 
 resource "routeros_interface_bridge_port" "vlan2000_port_on_rb5009-02" {
   provider          = routeros.rb5009-02
@@ -197,18 +189,21 @@ resource "routeros_ip_dhcp_server_lease" "vlan2000_macbook-pro" {
 
 # Define an address list for BGP peers.
 # This makes the firewall rule more maintainable.
-resource "routeros_ip_address_list" "bgp_peers_vlan2000" {
-  name    = "bgp_peers_vlan2000"
-  address = "192.168.88.2" # Replace with the actual IP address of your BGP peer.
-  comment = "Address list for BGP peers"
+resource "routeros_ip_firewall_addr_list" "vlan2000_bgp_peer" {
+  provider = routeros.rb5009-02
+  // name     = "bgp_peers_vlan2000"
+  address  = "192.168.88.2" # Replace with the actual IP address of your BGP peer.
+  list     = "vlan2000_addrs"
+  comment  = "Address list for BGP peers"
 }
 
 # Create a firewall filter rule to accept incoming BGP connections.
 resource "routeros_ip_firewall_filter" "allow_bgp_in_vlan2000" {
-  action        = "accept"
-  chain         = "input"
-  comment       = "Allow incoming BGP connections"
-  protocol      = "tcp"
-  dst_port      = "179"
-  src_address_list = routeros_ip_address_list.bgp_peers_vlan2000.name
+  provider         = routeros.rb5009-02
+  action           = "accept"
+  chain            = "input"
+  comment          = "Allow incoming BGP connections"
+  protocol         = "tcp"
+  dst_port         = "179"
+  src_address_list = routeros_ip_firewall_addr_list.vlan2000_bgp_peer.list
 }

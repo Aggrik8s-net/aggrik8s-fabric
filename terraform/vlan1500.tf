@@ -3,24 +3,27 @@
 //
 # Define an address list for BGP peers.
 # This makes the firewall rule more maintainable.
-resource "routeros_ip_address_list" "bgp_peers_vlan1500" {
-  name    = "bgp_peers_vlan1500"
-  address = "192.168.88.3" # Replace with the actual IP address of your BGP peer.
-  comment = "Address list for BGP peers"
+resource "routeros_ip_firewall_addr_list" "bgp_peers_vlan1500" {
+  provider = routeros.rb5009-01
+  // name     = "vlan1500_bgp_peer"
+  address  = "192.168.88.3" # Replace with the actual IP address of your BGP peer.
+  list     = "vlan1500_addrs"
+  comment  = "Address list for BGP peers"
 }
 
 # Create a firewall filter rule to accept incoming BGP connections.
 resource "routeros_ip_firewall_filter" "allow_bgp_in_vlan1500" {
-  action        = "accept"
-  chain         = "input"
-  comment       = "Allow incoming BGP connections"
-  protocol      = "tcp"
-  dst_port      = "179"
-  src_address_list = routeros_ip_address_list.bgp_peers_vlan1500.name
+  provider         = routeros.rb5009-01
+  action           = "accept"
+  chain            = "input"
+  comment          = "Allow incoming BGP connections"
+  protocol         = "tcp"
+  dst_port         = "179"
+  src_address_list = routeros_ip_firewall_addr_list.bgp_peers_vlan1500.list
 }
 
 resource "routeros_ip_dhcp_server_network" "vlan1500" {
-  provider = routeros.rb5009-01
+  provider   = routeros.rb5009-01
   address    = "192.168.15.0/24"
   gateway    = "192.168.15.2"
   dns_server = ["8.8.8.8", "8.8.4.4"]
@@ -162,7 +165,7 @@ resource "routeros_interface_vlan" "rb5009-01_vlan-1500" {
 
 resource "routeros_interface_vlan" "crs328-01_vlan-1500" {
   provider  = routeros.crs328-01
-  name      = "VLAN_1500"
+  name      = "VLAN1500"
   vlan_id   = 1500
   # interface = routeros_interface_vlan.crs328-01_vlan-1500.name
   interface = routeros_interface_bridge.crs328-01.name
