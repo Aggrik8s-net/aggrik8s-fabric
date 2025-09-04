@@ -10,22 +10,22 @@ variable "routeros_devices" {
     rb5009-01 = {
       host     = "192.168.88.2"
       username = "admin"
-      password = "vaxvot-parroc-wykTo6"
+      password = "your_password"
     }
     rb5009-02 = {
       host     = "192.168.88.3"
       username = "admin"
-      password = "vaxvot-parroc-wykTo6"
+      password = "your_password"
     }
     crs305-01 = {
       host     = "192.168.88.4"
       username = "admin"
-      password = "vaxvot-parroc-wykTo6"
+      password = "your_password"
     }
     crs328-01 = {
       host     = "192.168.88.5"
       username = "admin"
-      password = "vaxvot-parroc-wykTo6"
+      password = "your_password"
     }
   }
 }
