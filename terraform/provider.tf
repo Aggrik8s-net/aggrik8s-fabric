@@ -1,4 +1,21 @@
 terraform {
+  backend "s3" {
+    endpoints = {
+      s3 = "https://nyc3.digitaloceanspaces.com"
+    }
+
+    bucket = "aggrik8s-fabric"
+    key    = "terraform.tfstate"
+
+    # Deactivate a few AWS-specific checks
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_metadata_api_check     = true
+    skip_region_validation      = true
+    skip_s3_checksum            = true
+    region                      = "nyc3"
+  }
+
   required_providers {
     routeros  = {
       source  = "terraform-routeros/routeros"
@@ -6,6 +23,10 @@ terraform {
     }
     doppler = {
       source = "DopplerHQ/doppler"
+    }
+    digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "2.66.0"
     }
   }
 }
@@ -41,7 +62,7 @@ provider "routeros" {
   // host  = "192.168.10.2"
   hosturl        = "https://192.168.88.2"          # env ROS_HOSTURL or MIKROTIK_HOST
   username       = "admin"                         # env ROS_USERNAME or MIKROTIK_USER
-  password       = data.doppler_secrets.this.map.FABRIC_PASSWORD  # RouterOS Password
+  password       = data.doppler_secrets.aggrik8s-fabric.map.FABRIC_PASSWORD  # RouterOS Password
   #ca_certificate = "~/capath" # env ROS_CA_CERTIFICATE or MIKROTIK_CA_CERTIFICATE
   insecure       = true                            # env ROS_INSECURE or MIKROTIK_INSECURE
 }
@@ -51,7 +72,7 @@ provider "routeros" {
   // host  = "192.168.10.3"
   hosturl        = "https://192.168.88.3"        # env ROS_HOSTURL or MIKROTIK_HOST
   username       = "admin"                       # env ROS_USERNAME or MIKROTIK_USER
-  password       = data.doppler_secrets.this.map.FABRIC_PASSWORD  # RouterOS Password
+  password       = data.doppler_secrets.aggrik8s-fabric.map.FABRIC_PASSWORD  # RouterOS Password
   #ca_certificate = "~/capath" # env ROS_CA_CERTIFICATE or MIKROTIK_CA_CERTIFICATE
   insecure       = true                          # env ROS_INSECURE or MIKROTIK_INSECURE
 }
@@ -62,7 +83,7 @@ provider "routeros" {
 // host  = "192.168.10.4"
   hosturl        = "https://192.168.88.4"        # env ROS_HOSTURL or MIKROTIK_HOST
   username       = "admin"                       # env ROS_USERNAME or MIKROTIK_USER
-  password       = data.doppler_secrets.this.map.FABRIC_PASSWORD  # RouterOS Password
+  password       = data.doppler_secrets.aggrik8s-fabric.map.FABRIC_PASSWORD  # RouterOS Password
   #ca_certificate = "~/capath" # env ROS_CA_CERTIFICATE or MIKROTIK_CA_CERTIFICATE
   insecure       = true                          # env ROS_INSECURE or MIKROTIK_INSECURE
 }
@@ -73,8 +94,15 @@ provider "routeros" {
   // host  = "192.168.10.5"
   hosturl        = "https://192.168.88.5"        # env ROS_HOSTURL or MIKROTIK_HOST
   username       = "admin"                       # env ROS_USERNAME or MIKROTIK_USER
-  password       = data.doppler_secrets.this.map.FABRIC_PASSWORD  # RouterOS Password
+  password       = data.doppler_secrets.aggrik8s-fabric.map.FABRIC_PASSWORD  # RouterOS Password
   // sensitive      = true
   #ca_certificate = "~/capath" # env ROS_CA_CERTIFICATE or MIKROTIK_CA_CERTIFICATE
   insecure       = true                          # env ROS_INSECURE or MIKROTIK_INSECURE
 }
+
+provider "digitalocean" {
+  token             = data.doppler_secrets.aggrik8s-fabric.map.DO_TOKEN
+  spaces_access_id  = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_ACCESS_ID
+  spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_SECRET_KEY
+}
+

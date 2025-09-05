@@ -1,4 +1,4 @@
-data "doppler_secrets" "this" {
+data "doppler_secrets" "aggrik8s-fabric" {
   project = "aggrik8s-fabric"
   config  = "dev"
 }
