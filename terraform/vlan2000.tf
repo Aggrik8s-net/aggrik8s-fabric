@@ -2,7 +2,7 @@
 resource "routeros_ip_dhcp_server_network" "vlan2000" {
   provider = routeros.rb5009-02
   address    = "192.168.20.0/24"
-  gateway    = "192.168.20.2"
+  // gateway    = "192.168.20.2"
   dns_server = ["8.8.8.8, 8.8.4.4"]
 }
 

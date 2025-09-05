@@ -25,7 +25,7 @@ resource "routeros_ip_firewall_filter" "allow_bgp_in_vlan1500" {
 resource "routeros_ip_dhcp_server_network" "vlan1500" {
   provider   = routeros.rb5009-01
   address    = "192.168.15.0/24"
-  gateway    = "192.168.15.2"
+  // gateway    = "192.168.15.2"
   dns_server = ["8.8.8.8", "8.8.4.4"]
 
 /*
