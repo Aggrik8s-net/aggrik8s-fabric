@@ -1,8 +1,8 @@
 //  TEST bucket - verified to work
-//  resource "digitalocean_spaces_bucket" "foobar-aggrik8s-fabric" {
-//   name   = "foobar-aggrik8s-fabric"
-//   region = "nyc3"
-// }
+resource "digitalocean_spaces_bucket" "foobar-aggrik8s-fabric" {
+  name   = "foobar-aggrik8s-fabric"
+  region = "nyc3"
+}
 
 
 // Imported using:
