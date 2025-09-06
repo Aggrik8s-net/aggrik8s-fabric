@@ -6,5 +6,5 @@ We will build several Data Center configurations using RB5009 routers, CRS305 an
 The end goal will be to simulate a VXLAN/eBGP based multiple Data Center architecture.
 
 <p align="center">
-  <img src="https://github.com/Aggrik8s-net/aggrik8s-fabric/blob/main/docs/Aggrik8s%20Fabric.svg" title="Aggrik8s Fabric" style="background-color:grey;">
+  <img src="https://github.com/Aggrik8s-net/aggrik8s-fabric/blob/main/docs/Aggrik8s%20Fabric.svg" title="Aggrik8s Fabric" style="background-color:lightblue;">
 </p>
