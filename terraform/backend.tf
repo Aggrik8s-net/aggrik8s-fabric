@@ -1,8 +1,8 @@
 //  TEST bucket - verified to work
-import {
-  to = digitalocean_spaces_bucket.foobar-aggrik8s-fabric
-  id = "nyc3,foobar-aggrik8s-fabric" # Replace with your bucket's region and name
-} 
+// import {
+//   to = digitalocean_spaces_bucket.foobar-aggrik8s-fabric
+//   id = "nyc3,foobar-aggrik8s-fabric" # Replace with your bucket's region and name
+// } 
 resource "digitalocean_spaces_bucket" "foobar-aggrik8s-fabric" {
   name   = "foobar-aggrik8s-fabric"
   region = "nyc3"
