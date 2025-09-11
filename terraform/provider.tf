@@ -105,9 +105,9 @@ provider "routeros" {
 
 provider "digitalocean" {
   token             = data.doppler_secrets.aggrik8s-fabric.map.DO_TOKEN
-  // spaces_access_id  = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_ACCESS_ID
-  // spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_SECRET_KEY
-  spaces_access_id  = data.doppler_secrets.aggrik8s-fabric.map.AWS_ACCESS_KEY_ID
-  spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.AWS_SECRET_ACCESS_KEY
+  spaces_access_id  = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_ACCESS_ID
+  spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.DO_SPACES_SECRET_KEY
+  // spaces_access_id  = data.doppler_secrets.aggrik8s-fabric.map.AWS_ACCESS_KEY_ID
+  // spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.AWS_SECRET_ACCESS_KEY
 }
 
