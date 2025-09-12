@@ -5,7 +5,7 @@
 resource "routeros_ip_dhcp_server_network" "vlan10" {
   provider = routeros.crs328-01
   address    = "192.168.10.0/24"
-  gateway    = "192.168.10.2"
+  gateway    = "192.168.10.5"
   dns_server = ["8.8.8.8, 8.8.4.4"]
 }
 

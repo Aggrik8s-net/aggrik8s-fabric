@@ -2,7 +2,7 @@
 resource "routeros_ip_dhcp_server_network" "vlan2000" {
   provider = routeros.rb5009-02
   address    = "192.168.20.0/24"
-  // gateway    = "192.168.20.2"
+  gateway    = "192.168.20.3"
   dns_server = ["8.8.8.8, 8.8.4.4"]
 }
 
@@ -192,7 +192,7 @@ resource "routeros_ip_dhcp_server_lease" "vlan2000_macbook-pro" {
 resource "routeros_ip_firewall_addr_list" "vlan2000_bgp_peer" {
   provider = routeros.rb5009-02
   // name     = "bgp_peers_vlan2000"
-  address  = "192.168.88.2" # Replace with the actual IP address of your BGP peer.
+  address  = "192.168.88.4" # Replace with the actual IP address of your BGP peer.
   list     = "vlan2000_addrs"
   comment  = "Address list for BGP peers"
 }

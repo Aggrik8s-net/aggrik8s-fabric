@@ -19,6 +19,11 @@ resource "routeros_system_clock" "rb5009-02_timezone" {
   time_zone_name       = "America/New_York"
   time_zone_autodetect = false
 }
+// resource "routeros_identity" "router_id_rb5009-02" {
+//   provider = routeros.rb5009-02
+//   name = "id-1" # Set your desired Router ID here
+// #  id       = routeros_ip_address.ospf_loopback_ip_rb5009-02.network
+// }
 
 // crs305-02
 resource "routeros_system_identity" "crs305-01_identity" {
