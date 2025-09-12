@@ -5,6 +5,7 @@ provider "registry.terraform.io/digitalocean/digitalocean" {
   version     = "2.66.0"
   constraints = "2.66.0"
   hashes = [
+    "h1:3FGCHCcsYlqZzA68Nvt3l7bx7uQS4Xuel/9dcsMnuZQ=",
     "h1:DzZFqFlNV8rqIFlKe/rNNzl6oDgP8q+A9JlT0FNMf7s=",
     "zh:004faa95468130dae03989b968829b3cce8f20ca8f9ce108fa87803a814067f7",
     "zh:02d006f6bfff57dcafa90d00fc973f3078f992699d6dfe1d9ed0fd13f3c0af8d",
@@ -29,6 +30,7 @@ provider "registry.terraform.io/dopplerhq/doppler" {
   version = "1.20.0"
   hashes = [
     "h1:5fdSuugMkpULeH3CK1i58jqGMVGZQSI2BBJrsoxQq5U=",
+    "h1:gr8K1LI9FWBnnmj9zd2XiEExgCghP9qQWgGYe9i6yjI=",
     "zh:0e46a5e2147fd6dbdb41175be4d063ece38ba2f8c3543b91ea738ccec8a279a2",
     "zh:33ccfa81e78c6f8d41cf935e5b904d9da15d7757f3bbcfa21bb2f1b4ef5e27f3",
     "zh:35a30eabc5f3f1e766ff86665a1eb792d36d69fec17e24cc7eb5f16b4ffd5084",
@@ -50,6 +52,7 @@ provider "registry.terraform.io/terraform-routeros/routeros" {
   version = "1.86.3"
   hashes = [
     "h1:gcr0Fsl2tu/1xYqqMCLGx2BFFON1VJ9Cm0KYAMFR3O8=",
+    "h1:wR3HMGAPyJdHs5d3vi7pzK19A0t8F3jKKePhe3FhajQ=",
     "zh:018c6f5195f2592e420bb9d7932aff8bea619633bb478bc0cb094b4cddd882aa",
     "zh:15a59145a1d5ce1fa2c266bca749c912a207bfc1b44ea0ca773797207a790522",
     "zh:27af23936d4ba01610451ef90893e9c17bb9b2f2785c0dbb38ce31a1720cc14f",
