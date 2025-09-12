@@ -6,7 +6,7 @@
 resource "routeros_ip_firewall_addr_list" "bgp_peers_vlan1500" {
   provider = routeros.rb5009-01
   // name     = "vlan1500_bgp_peer"
-  address  = "192.168.88.3" # Replace with the actual IP address of your BGP peer.
+  address  = "192.168.88.4" # Replace with the actual IP address of your BGP peer.
   list     = "vlan1500_addrs"
   comment  = "Address list for BGP peers"
 }
@@ -25,7 +25,7 @@ resource "routeros_ip_firewall_filter" "allow_bgp_in_vlan1500" {
 resource "routeros_ip_dhcp_server_network" "vlan1500" {
   provider   = routeros.rb5009-01
   address    = "192.168.15.0/24"
-  // gateway    = "192.168.15.2"
+  gateway    = "192.168.15.2"
   dns_server = ["8.8.8.8", "8.8.4.4"]
 
 /*
