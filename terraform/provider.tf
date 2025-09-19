@@ -7,7 +7,7 @@ terraform {
 
     bucket = "aggrik8s-fabric"
     key    = "terraform.tfstate"
-
+    use_lockfile = true
     # Deactivate a few AWS-specific checks
     skip_credentials_validation = true
     # skip_requesting_account_id  = true
