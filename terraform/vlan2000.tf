@@ -1,8 +1,16 @@
+locals {
+  vlan2000-rb5009-01_ip  = "192.168.20.2/24"
+  vlan2000-rb5009-02_ip  = "192.168.20.3/24"
+  vlan2000-crs305-01_ip  = "192.168.20.4/24"
+  vlan2000-crs328-01_ip  = "192.168.20.5/24"
+  vlan2000-gw            = "192.168.20.3"
+}
 
 resource "routeros_ip_dhcp_server_network" "vlan2000" {
   provider = routeros.rb5009-02
   address    = "192.168.20.0/24"
-  gateway    = "192.168.20.3"
+  # gateway    = "192.168.20.3"
+  gateway    = local.vlan2000-gw
   dns_server = ["8.8.8.8, 8.8.4.4"]
 }
 
@@ -148,7 +156,7 @@ resource "routeros_interface_bridge_port" "vlan2000_port_on_crs328-01" {
 # Assign an IP address to the VLAN interface
 resource "routeros_ip_address" "rb5009-02_vlan-2000_address" {
   provider = routeros.rb5009-02
-  address   = "192.168.20.3/24"
+  address   = local.vlan2000-rb5009-02_ip
   interface = routeros_interface_vlan.rb5009-02_vlan-2000.name
   comment = "Talos West (TF)"
 }
@@ -158,7 +166,7 @@ resource "routeros_ip_address" "rb5009-02_vlan-2000_address" {
 # Assign an IP address to the VLAN interface
 resource "routeros_ip_address" "crs305-01_vlan-2000_address" {
   provider = routeros.crs305-01
-  address   = "192.168.20.4/24"
+  address   = local.vlan2000-crs305-01_ip
   interface = routeros_interface_vlan.crs305-01_vlan-2000.name
   comment   = "VLAN2000 ipv4 assignment"
 }
@@ -166,7 +174,7 @@ resource "routeros_ip_address" "crs305-01_vlan-2000_address" {
 # Assign an IP address to the VLAN interface
 resource "routeros_ip_address" "crs328-01_vlan-2000_address" {
   provider = routeros.crs328-01
-  address   = "192.168.20.5/24"
+  address   = local.vlan2000-crs328-01_ip
   interface = routeros_interface_vlan.crs328-01_vlan-2000.name
 }
 //
