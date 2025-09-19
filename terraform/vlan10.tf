@@ -205,12 +205,19 @@ resource "routeros_ip_dhcp_server_lease" "pi-print-01" {
 
   comment     = "Terraformed static lease."
 }
-resource "routeros_ip_dhcp_server_lease" "macbook-pro" {
+resource "routeros_ip_dhcp_server_lease" "macbook-pro-insignia" {
   provider    = routeros.crs328-01
   mac_address = "4C:EA:41:67:63:DB"
   address     = "192.168.10.50"
   server      = routeros_ip_dhcp_server.vlan10.name
   comment     = "Terraformed static lease."
+}
+resource "routeros_ip_dhcp_server_lease" "macbook-pro-satchi" {
+  provider    = routeros.crs328-01
+  mac_address = "4C:EA:41:65:BC:69"
+  address     = "192.168.10.51"
+  server      = routeros_ip_dhcp_server.vlan10.name
+  comment     = "MacBook Pro Satchi NIC (TF)."
 }
 //
 // piCluster
