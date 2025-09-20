@@ -1,5 +1,5 @@
 locals {
-  vlan2000-rb5009-01_ip  = "192.168.20.2/24"
+  vlan2000-rb5009-01_ip  = "192.168.20.2192.168.20.2/24"
   vlan2000-rb5009-02_ip  = "192.168.20.3/24"
   vlan2000-crs305-01_ip  = "192.168.20.4/24"
   vlan2000-crs328-01_ip  = "192.168.20.5/24"
@@ -37,26 +37,26 @@ resource "routeros_ip_dhcp_server" "vlan2000" {
 //
 //
 //
-// resource "routeros_interface_vlan" "rb5009-01_vlan-2000" {
-//   provider = routeros.rb5009-01
-//   name      = "VLAN2000"
-//   vlan_id   = 2000
-//   interface = routeros_interface_bridge.rb5009-01.name
-//   comment = "Talos West (TF)"
-// }
+resource "routeros_interface_vlan" "rb5009-01_vlan-2000" {
+  provider = routeros.rb5009-01
+  name      = "VLAN2000"
+  vlan_id   = 2000
+  interface = routeros_interface_bridge.rb5009-01.name
+  comment = "Talos West (TF)"
+}
 //
 //
 //
-// resource "routeros_interface_bridge_port" "vlan2000_port_on_rb5009-01" {
-//   provider          = routeros.rb5009-01
-//   bridge            = routeros_interface_bridge.rb5009-01.name
-//   pvid              = routeros_interface_vlan.rb5009-01_vlan-2000.vlan_id
-//   interface         = routeros_interface_vlan.rb5009-01_vlan-2000.name
-//   frame_types       = "admit-only-vlan-tagged"
-//   ingress_filtering = true
-//   hw                = true
-//   comment           = "Talos West (TF)"
-// }
+resource "routeros_interface_bridge_port" "vlan2000_port_on_rb5009-01" {
+  provider          = routeros.rb5009-01
+  bridge            = routeros_interface_bridge.rb5009-01.name
+  pvid              = routeros_interface_vlan.rb5009-01_vlan-2000.vlan_id
+  interface         = routeros_interface_vlan.rb5009-01_vlan-2000.name
+  frame_types       = "admit-only-vlan-tagged"
+  ingress_filtering = true
+  hw                = true
+  comment           = "Talos West (TF)"
+}
 
 resource "routeros_interface_vlan" "rb5009-02_vlan-2000" {
   provider = routeros.rb5009-02
@@ -146,12 +146,12 @@ resource "routeros_interface_bridge_port" "vlan2000_port_on_crs328-01" {
 // .
 //
 # Assign an IP address to the VLAN interface
-// resource "routeros_ip_address" "rb5009-01_vlan-2000_address" {
-//   provider = routeros.rb5009-01
-//   address   = "192.168.20.2/24"
-//   interface = routeros_interface_vlan.rb5009-01_vlan-2000.name
-//   comment = "Talos West (TF)"
-// }
+resource "routeros_ip_address" "rb5009-01_vlan-2000_address" {
+  provider = routeros.rb5009-01
+  address   = "192.168.20.2/24"
+  interface = routeros_interface_vlan.rb5009-01_vlan-2000.name
+  comment = "Talos West (TF)"
+}
 
 # Assign an IP address to the VLAN interface
 resource "routeros_ip_address" "rb5009-02_vlan-2000_address" {
