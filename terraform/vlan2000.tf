@@ -87,8 +87,8 @@ resource "routeros_interface_bridge_vlan" "vlan2000_rb5009-02" {
   provider   = routeros.rb5009-02
   bridge     = routeros_interface_bridge.rb5009-02.name
   vlan_ids   = [routeros_interface_vlan.rb5009-02_vlan-2000.vlan_id]
-  tagged     = [routeros_interface_vlan.rb5009-02_vlan-2000.interface, "ether2", "ether4", "sfp-sfpplus1"]
-  untagged   = ["ether5", "ether6", "ether7", "ether8"]        # Example port
+  tagged     = [routeros_interface_vlan.rb5009-02_vlan-2000.interface, "ether2", "sfp-sfpplus1"]
+  untagged   = ["ether4"]        # Example port
 }
 
 resource "routeros_interface_bridge_vlan" "vlan2000_crs305-01" {
@@ -103,8 +103,8 @@ resource "routeros_interface_bridge_vlan" "vlan2000_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-2000.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-2000.interface, "ether8", "ether18", "ether22", "sfp-sfpplus1",  "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
-  untagged   = ["ether7", "ether17"]        # Example port
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-2000.interface, "ether8", "sfp-sfpplus1",  "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
+  untagged   = ["ether7"]        # Example port
 }
 
 

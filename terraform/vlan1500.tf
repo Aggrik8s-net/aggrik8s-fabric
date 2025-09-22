@@ -111,16 +111,16 @@ resource "routeros_interface_bridge_vlan" "vlan1500_rb5009-01" {
   provider   = routeros.rb5009-01
   bridge     = routeros_interface_bridge.rb5009-01.name
   vlan_ids   = [routeros_interface_vlan.rb5009-01_vlan-1500.vlan_id]
-  tagged     = ["bridge", "ether2", "ether4", "sfp-sfpplus1"]
-  untagged   = ["ether5", "ether6", "ether7", "ether8"]        # Example port
+  tagged     = ["bridge", "ether2", "sfp-sfpplus1"]
+  untagged   = ["ether3"]        # Example port
 }
 
 resource "routeros_interface_bridge_vlan" "vlan1500_rb5009-02" {
   provider   = routeros.rb5009-02
   bridge     = routeros_interface_bridge.rb5009-02.name
   vlan_ids   = [routeros_interface_vlan.rb5009-02_vlan-1500.vlan_id]
-  tagged     = ["bridge", "ether2", "ether4", "sfp-sfpplus1"]
-  untagged   = []        # Example port
+  tagged     = ["bridge", "ether2", "sfp-sfpplus1"]
+  untagged   = ["ether3"]        # Example port
 }
 
 resource "routeros_interface_bridge_vlan" "vlan1500_crs305-01" {
@@ -135,8 +135,8 @@ resource "routeros_interface_bridge_vlan" "vlan1500_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-1500.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-1500.interface,  "ether8", "ether18", "ether22", "sfp-sfpplus1", "sfp-sfpplus3", "sfp-sfpplus4"]
-  untagged   = ["ether7", "ether17"]        # Example port
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-1500.interface,  "ether8", "sfp-sfpplus1", "sfp-sfpplus3", "sfp-sfpplus4"]
+  untagged   = ["ether5"]        # Example port
 }
 
 resource "routeros_interface_vlan" "crs305-01_vlan-1500" {
