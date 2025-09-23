@@ -381,7 +381,7 @@ resource "routeros_interface_ethernet" "bond_interfaces_crs328-01_rb5009-02" {
 //////
 resource "routeros_interface_bonding" "rb5009-01_crs328-01" {
   provider = routeros.rb5009-01
-  name  = "rb5009-01_crs328-01"
+  name  = "crs328-01_bond"
   mode  = "802.3ad" # Or other modes like "balance-rr", "active-backup", etc.
   slaves = ["bond_1-1", "bond_1-2", "bond_1-3", "bond_1-4"] # Replace with your actual interface names
   # Optional parameters
@@ -390,7 +390,7 @@ resource "routeros_interface_bonding" "rb5009-01_crs328-01" {
 }
 resource "routeros_interface_bonding" "rb5009-02_crs328-01" {
   provider = routeros.rb5009-02
-  name  = "rb5009-02_crs328-01"
+  name  = "crs328-01_bond"
   mode  = "802.3ad" # Or other modes like "balance-rr", "active-backup", etc.
   slaves = ["bond_2-1", "bond_2-2", "bond_2-3", "bond_2-4"] # Replace with your actual interface names
   # Optional parameters
@@ -399,7 +399,7 @@ resource "routeros_interface_bonding" "rb5009-02_crs328-01" {
 }
 resource "routeros_interface_bonding" "crs328-01_rb5009-01" {
   provider = routeros.crs328-01
-  name  = "crs328-01_rb5009-01"
+  name  = "rb5009-01_bond"
   mode  = "802.3ad" # Or other modes like "balance-rr", "active-backup", etc.
   slaves = ["bond_3-1", "bond_3-2", "bond_3-3", "bond_3-4"] # Replace with your actual interface names
   # Optional parameters
@@ -408,7 +408,7 @@ resource "routeros_interface_bonding" "crs328-01_rb5009-01" {
 }
 resource "routeros_interface_bonding" "crs328-01_rb5009-02" {
   provider = routeros.crs328-01
-  name  = "crs328-01_rb509-02"
+  name  = "rb5009-02_bond"
   mode  = "802.3ad" # Or other modes like "balance-rr", "active-backup", etc.
   slaves = ["bond_4-1", "bond_4-2", "bond_4-3", "bond_4-4"] # Replace with your actual interface names
   # Optional parameters

@@ -5,7 +5,7 @@
 resource "routeros_ip_dhcp_server_network" "vlan10" {
   provider = routeros.crs328-01
   address    = "192.168.10.0/24"
-  gateway    = "192.168.10.5"
+  gateway    = "192.168.10.2"
   dns_server = ["8.8.8.8, 8.8.4.4"]
 }
 
@@ -58,7 +58,7 @@ resource "routeros_interface_bridge_vlan" "vlan10_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-10.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "ether8", "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
   untagged   = ["ether9", "ether10", "ether11", "ether12", "ether13", "ether14", "ether15", "ether16", "sfp-sfpplus1"]
 }
 
