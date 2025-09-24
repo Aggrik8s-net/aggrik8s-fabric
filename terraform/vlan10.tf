@@ -58,8 +58,8 @@ resource "routeros_interface_bridge_vlan" "vlan10_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-10.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "ether8", "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
-  untagged   = ["ether9", "ether10", "ether11", "ether12", "ether13", "ether14", "ether15", "ether16", "sfp-sfpplus1"]
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "ether8",  "sfp-sfpplus1", "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
+  untagged   = ["ether9", "ether10", "ether11", "ether12", "ether13", "ether14", "ether15", "ether16"]
 }
 
 resource "routeros_interface_vlan" "rb5009-01_vlan-10" {

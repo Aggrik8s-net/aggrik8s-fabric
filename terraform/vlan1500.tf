@@ -135,7 +135,7 @@ resource "routeros_interface_bridge_vlan" "vlan1500_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-1500.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-1500.interface,  "ether8", "sfp-sfpplus1", "sfp-sfpplus3", "sfp-sfpplus4"]
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-1500.interface, "ether6", "ether8", "sfp-sfpplus1", "sfp-sfpplus3", "sfp-sfpplus4"]
   untagged   = ["ether5"]        # Example port
 }
 
