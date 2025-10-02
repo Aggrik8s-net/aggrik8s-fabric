@@ -1,3 +1,16 @@
+locals {
+  proxmox_api_endpoint = "https://192.168.88.10:8006/"
+  proxmox_api_token = "${data.doppler_secrets.aggrik8s-fabric.map.ROOT_TERRAFORM_TOKEN}=${data.doppler_secrets.aggrik8s-fabric.map.ROOT_TERRAFORM_SECRET}"
+}
+
+//
+// .
+//
+output "api_token" {
+  value = local.proxmox_api_token
+  sensitive = true
+}
+
 terraform {
   backend "s3" {
     endpoints = {
@@ -30,6 +43,10 @@ terraform {
     digitalocean = {
       source = "digitalocean/digitalocean"
       version = "2.66.0"
+    }
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "~> 0.75.0"
     }
   }
 }
@@ -111,3 +128,19 @@ provider "digitalocean" {
   // spaces_secret_key = data.doppler_secrets.aggrik8s-fabric.map.AWS_SECRET_ACCESS_KEY
 }
 
+provider "proxmox" {
+  endpoint = local.proxmox_api_endpoint
+  // api_token  =  var.proxmox_api_token
+  // api_token = local.proxmox_api_token
+  username = data.doppler_secrets.aggrik8s-fabric.map.PROXMOX_USER
+  password = data.doppler_secrets.aggrik8s-fabric.map.PROXMOX_USER_PWD
+  insecure  = true
+  ssh {
+    agent = true
+    // username = var.proxmox_user
+    // username = data.doppler_secrets.aggrik8s-fabric.map.PROXMOX_USER
+    // password = var.proxmox_root_pwd
+    // password = data.doppler_secrets.aggrik8s-fabric.map.PROXMOX_USER_PWD
+
+  }
+}
