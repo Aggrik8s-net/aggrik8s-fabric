@@ -1,3 +1,4 @@
+
 //
 //
 //
@@ -26,7 +27,18 @@ resource "routeros_ip_dhcp_server_network" "vlan1500" {
   provider   = routeros.rb5009-01
   address    = "192.168.15.0/24"
   gateway    = "192.168.15.2"
+
   dns_server = ["8.8.8.8", "8.8.4.4"]
+  //
+  // Add DHCP PXE Boot support
+  //
+  # The IP address of the TFTP server where the boot file is located.
+  # This corresponds to DHCP Option 66.
+  next_server = "192.168.15.2"
+
+  # The filename of the PXE bootloader.
+  # This corresponds to DHCP Option 67.
+  boot_file_name = "talos-metal-v1.11.2-amd64.gcow"
 
 /*
   lifecycle {
