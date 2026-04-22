@@ -7,6 +7,13 @@ resource "routeros_ip_dhcp_server_network" "vlan10" {
   address    = "192.168.10.0/24"
   gateway    = "192.168.10.2"
   dns_server = ["8.8.8.8, 8.8.4.4"]
+
+  # Use lifecycle to ignore drift in dns_server
+  lifecycle {
+    ignore_changes = [
+      dns_server,
+    ]
+  }
 }
 
 resource "routeros_ip_pool" "vlan10_core" {
@@ -17,9 +24,10 @@ resource "routeros_ip_pool" "vlan10_core" {
 
 resource "routeros_ip_dhcp_server" "vlan10" {
   provider     = routeros.crs328-01
-  address_pool = routeros_ip_pool.vlan10_core.id
+  address_pool = routeros_ip_pool.vlan10_core.name
   interface    = routeros_interface_vlan.crs328-01_vlan-10.name
   name         = "vlan10"
+  dynamic_lease_identifiers = "client-mac"
   comment      = "Terraformed DHCP server for vlan10."
 
   //  lifecycle {
@@ -34,7 +42,9 @@ resource "routeros_interface_bridge_vlan" "vlan10_rb5009-01" {
   bridge     = routeros_interface_bridge.rb5009-01.name
   vlan_ids   = [routeros_interface_vlan.rb5009-01_vlan-10.vlan_id]
   tagged     = [routeros_interface_vlan.rb5009-01_vlan-10.interface, "ether2", "sfp-sfpplus1"]
-  untagged   = ["ether3"]
+  # untagged   = ["ether3"]
+  untagged   = []
+  comment    = "vlan10 (TF)"
 }
 
 resource "routeros_interface_bridge_vlan" "vlan10_rb5009-02" {
@@ -42,7 +52,9 @@ resource "routeros_interface_bridge_vlan" "vlan10_rb5009-02" {
   bridge     = routeros_interface_bridge.rb5009-02.name
   vlan_ids   = [routeros_interface_vlan.rb5009-02_vlan-10.vlan_id]
   tagged     = [routeros_interface_vlan.rb5009-02_vlan-10.interface, "ether2", "sfp-sfpplus1"]
-  untagged   = ["ether3"]
+  # untagged   = ["ether3"]
+  untagged = []
+  comment    = "vlan10 (TF)"
 }
 
 resource "routeros_interface_bridge_vlan" "vlan10_crs305-01" {
@@ -58,8 +70,9 @@ resource "routeros_interface_bridge_vlan" "vlan10_crs328-01" {
   provider   = routeros.crs328-01
   bridge     = routeros_interface_bridge.crs328-01.name
   vlan_ids   = [routeros_interface_vlan.crs328-01_vlan-10.vlan_id]
-  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "ether8",  "sfp-sfpplus1", "sfp-sfpplus2", "sfp-sfpplus3", "sfp-sfpplus4"]
+  tagged     = [routeros_interface_vlan.crs328-01_vlan-10.interface, "ether8", "ether8", "sfp-sfpplus1", "sfp-sfpplus3", "sfp-sfpplus4"]
   untagged   = ["ether9", "ether10", "ether11", "ether12", "ether13", "ether14", "ether15", "ether16"]
+  comment    = "vlan10 (TF)"
 }
 
 resource "routeros_interface_vlan" "rb5009-01_vlan-10" {
@@ -176,6 +189,8 @@ resource "routeros_interface_bridge_port" "vlan10_port_on_crs328-01" {
 //
 // . piNet utility boxes
 //
+
+/*
 resource "routeros_ip_dhcp_server_lease" "macmini" {
   provider    = routeros.crs328-01
   mac_address = "5C:E9:1E:E4:0E:DD"
@@ -183,6 +198,8 @@ resource "routeros_ip_dhcp_server_lease" "macmini" {
   server      = routeros_ip_dhcp_server.vlan10.name
   comment     = "Terraformed static lease."
 }
+*/
+
 resource "routeros_ip_dhcp_server_lease" "pi-manage-01" {
   provider    = routeros.crs328-01
   mac_address = "00:05:1B:DC:FD:AF"

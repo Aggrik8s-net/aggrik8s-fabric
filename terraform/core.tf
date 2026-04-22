@@ -235,6 +235,13 @@ resource "routeros_ip_dhcp_server_network" "vlan1" {
   address    = "192.168.88.0/24"
   gateway    = "192.168.88.2"
   dns_server = ["8.8.8.8, 8.8.4.4"]
+
+  # Use lifecycle to ignore drift in dns_server
+  lifecycle {
+    ignore_changes = [
+      dns_server,
+    ]
+  }
 }
 
 resource "routeros_ip_pool" "vlan1" {
@@ -246,7 +253,7 @@ resource "routeros_ip_pool" "vlan1" {
 
 resource "routeros_ip_dhcp_server" "vlan1" {
   provider     = routeros.crs305-01
-  address_pool = routeros_ip_pool.vlan1.id
+  address_pool = routeros_ip_pool.vlan1.name
   # interface    = routeros_interface_vlan.crs305-01_vlan-1.name
   # interface    = routeros_interface_vlan.crs305-01.
   interface    = routeros_interface_bridge.crs305-01.name

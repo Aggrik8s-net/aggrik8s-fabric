@@ -40,16 +40,35 @@ resource "routeros_ip_dhcp_server_network" "vlan1500" {
   # This corresponds to DHCP Option 67.
   boot_file_name = "talos-metal-v1.11.2-amd64.gcow"
 
-/*
+  # Use lifecycle to ignore drift in dns_server
   lifecycle {
     ignore_changes = [
-      id,
-      dns_server
+      dns_server,
     ]
   }
-*/
 
+  //
+  // Add DHCP PXE Boot support
+  //
+  # The IP address of the TFTP server where the boot file is located.
+  # This corresponds to DHCP Option 66.
+  next_server = "192.168.15.2"
+
+  # The filename of the PXE bootloader.
+  # This corresponds to DHCP Option 67.
+  boot_file_name = "v1.11.2-metal-amd64.gcow2"
 }
+
+#resource "routeros_tool_fetch" "talos-east_boot_file" {
+#  provider   = routeros.rb5009-01
+#  # url      = "https://boot.netboot.xyz/ipxe/netboot.xyz.kpxe"
+#  url          = "https://factory.talos.dev/image/c395af11c69c3b5cb2066e6199b43c90294e8a41349649c6672ab2cd02ec03fe/v1.11.2/metal-amd64.qcow2"
+#
+#  file     = "tftp/talos-v1.11.2-metal-amd64.gcow2" # Destination path on the router
+#  comment  = "Fetch Talos PXE boot image"
+#}
+
+
 //
 //
 //
@@ -105,18 +124,19 @@ resource "routeros_ip_pool" "vlan1500_core" {
 
 resource "routeros_ip_dhcp_server" "vlan1500" {
   provider     = routeros.rb5009-01
-  address_pool = routeros_ip_pool.vlan1500_core.id
+  address_pool = routeros_ip_pool.vlan1500_core.name
   interface    = routeros_interface_vlan.rb5009-01_vlan-1500.name
   # interface    = "ether2"
   name         = "dhcp_vlan1500"
   comment      = "DHCP server for vlan1500."
-/*
-  lifecycle {
-    ignore_changes = [
-      address_pool,
-    ]
-  }
-*/
+  dynamic_lease_identifiers = "client-mac"
+  /*
+    lifecycle {
+      ignore_changes = [
+        address_pool,
+      ]
+    }
+  */
 }
 
 resource "routeros_interface_bridge_vlan" "vlan1500_rb5009-01" {

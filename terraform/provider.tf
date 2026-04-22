@@ -36,6 +36,7 @@ terraform {
     routeros  = {
       source  = "terraform-routeros/routeros"
       // version = "7.20rc1"
+      version = "1.99.1" # Update this to the newest version
     }
     doppler = {
       source = "DopplerHQ/doppler"

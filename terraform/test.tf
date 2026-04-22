@@ -108,6 +108,8 @@ resource "proxmox_virtual_environment_download_file" "release_20231211_ubuntu_22
 }
 */
 
+/*
+
 resource "random_password" "ubuntu_container_password" {
   length           = 16
   override_special = "_%@"
@@ -194,16 +196,19 @@ output "ubuntu_container_public_key" {
   value = tls_private_key.ubuntu_container_key.public_key_openssh
 }
 
-resource "proxmox_virtual_environment_file" "ubuntu_container_template" {
-  content_type = "vztmpl"
-  datastore_id = "local"
-  node_name    = "pve"
+# resource "proxmox_virtual_environment_file" "ubuntu_container_template" {
+#  content_type = "vztmpl"
+#  datastore_id = "local"
+#  node_name    = "pve"
+#
+#  source_file {
+#    path = "http://download.proxmox.com/images/system/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+#  }
+# }
 
-  source_file {
-    path = "http://download.proxmox.com/images/system/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
-  }
-}
+# data  "proxmox_virtual_environment_datastores" "pve" {
+#   node_name = "pve"
+# }
 
-data  "proxmox_virtual_environment_datastores" "pve" {
-  node_name = "pve"
-}
+
+*/

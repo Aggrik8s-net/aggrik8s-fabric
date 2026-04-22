@@ -14,11 +14,11 @@ resource "routeros_snmp" "rb5009-01" {
 }
 resource "routeros_snmp_community" "test_rb5009-01" {
   provider = routeros.rb5009-01
-  authentication_password = "authpasswd"
+  authentication_password = data.doppler_secrets.aggrik8s-fabric.map.SNMP_AUTH_PASSWD
   authentication_protocol = "MD5"
   comment                 = "Test Community"
   disabled                = true
-  encryption_password     = "encpassword"
+  encryption_password     = data.doppler_secrets.aggrik8s-fabric.map.SNMP_ENC_PASSWD
   encryption_protocol     = "DES"
   name                    = "test"
   read_access             = true
@@ -27,7 +27,7 @@ resource "routeros_snmp_community" "test_rb5009-01" {
 }
 resource "routeros_snmp_community" "aggrik8s_rb5009-01" {
   provider = routeros.rb5009-01
-  addresses = ["192.168.88.50", "192.168.88.51", "192.168.88.21", "192.168.15.27", "192.168.10.10"]
+  addresses = ["192.168.88.50/32", "192.168.88.51/32", "192.168.88.21/32", "192.168.15.27/32", "192.168.10.10/32"]
   name      = "aggrik8s"
 }
 
@@ -47,11 +47,11 @@ resource "routeros_snmp" "rb5009-02" {
 }
 resource "routeros_snmp_community" "test_rb5009-02" {
   provider = routeros.rb5009-02
-  authentication_password = "authpasswd"
+  authentication_password = data.doppler_secrets.aggrik8s-fabric.map.SNMP_AUTH_PASSWD
   authentication_protocol = "MD5"
   comment                 = "Test Community"
   disabled                = true
-  encryption_password     = "encpassword"
+  encryption_password     = data.doppler_secrets.aggrik8s-fabric.map.SNMP_ENC_PASSWD
   encryption_protocol     = "DES"
   name                    = "test"
   read_access             = true
@@ -60,7 +60,7 @@ resource "routeros_snmp_community" "test_rb5009-02" {
 }
 resource "routeros_snmp_community" "aggrik8s_rb5009-02" {
   provider = routeros.rb5009-02
-  addresses = ["192.168.88.50", "192.168.88.51", "192.168.88.21", "192.168.15.27", "192.168.10.10"]
+  addresses = ["192.168.88.50/32", "192.168.88.51/32", "192.168.88.21/32", "192.168.15.27/32", "192.168.10.10/32"]
   name      = "aggrik8s"
 }
 
@@ -80,11 +80,11 @@ resource "routeros_snmp" "crs305-01" {
 }
 resource "routeros_snmp_community" "test_crs305-01" {
   provider = routeros.crs305-01
-  authentication_password = "authpasswd"
+  authentication_password = data.doppler_secrets.aggrik8s-fabric.map.SNMP_AUTH_PASSWD
   authentication_protocol = "MD5"
   comment                 = "Test Community"
   disabled                = true
-  encryption_password     = "encpassword"
+  encryption_password     = data.doppler_secrets.aggrik8s-fabric.map.SNMP_ENC_PASSWD
   encryption_protocol     = "DES"
   name                    = "test"
   read_access             = true
@@ -93,7 +93,7 @@ resource "routeros_snmp_community" "test_crs305-01" {
 }
 resource "routeros_snmp_community" "aggrik8s_crs305-01" {
   provider = routeros.crs305-01
-  addresses = ["192.168.88.50", "192.168.88.51", "192.168.88.21", "192.168.15.27", "192.168.10.10"]
+  addresses = ["192.168.88.50/32", "192.168.88.51/32", "192.168.88.21/32", "192.168.15.27/32", "192.168.10.10/32"]
   name      = "aggrik8s"
 }
 
@@ -113,11 +113,11 @@ resource "routeros_snmp" "crs328-01" {
 }
 resource "routeros_snmp_community" "test_crs328-01" {
   provider = routeros.crs328-01
-  authentication_password = "authpasswd"
+  authentication_password = data.doppler_secrets.aggrik8s-fabric.map.SNMP_AUTH_PASSWD
   authentication_protocol = "MD5"
   comment                 = "Test Community"
   disabled                = true
-  encryption_password     = "encpassword"
+  encryption_password     = data.doppler_secrets.aggrik8s-fabric.map.SNMP_ENC_PASSWD
   encryption_protocol     = "DES"
   name                    = "test"
   read_access             = true
@@ -126,6 +126,6 @@ resource "routeros_snmp_community" "test_crs328-01" {
 }
 resource "routeros_snmp_community" "aggrik8s_crs328-01" {
   provider = routeros.crs328-01
-  addresses = ["192.168.88.50", "192.168.88.51", "192.168.88.21", "192.168.15.27", "192.168.10.10"]
+  addresses = ["192.168.88.50/32", "192.168.88.51/32", "192.168.88.21/32", "192.168.15.27/32", "192.168.10.10/32"]
   name      = "aggrik8s"
 }
