@@ -52,11 +52,14 @@ resource "routeros_ip_dhcp_server_network" "vlan1500" {
   //
   # The IP address of the TFTP server where the boot file is located.
   # This corresponds to DHCP Option 66.
-  next_server = "192.168.15.2"
-
+  //
+  // next_server = "192.168.15.2"
+  //
   # The filename of the PXE bootloader.
   # This corresponds to DHCP Option 67.
-  boot_file_name = "v1.11.2-metal-amd64.gcow2"
+  //
+  // boot_file_name = "v1.11.2-metal-amd64.gcow2"
+  //
 }
 
 #resource "routeros_tool_fetch" "talos-east_boot_file" {
