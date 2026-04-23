@@ -40,6 +40,7 @@ terraform {
     }
     doppler = {
       source = "DopplerHQ/doppler"
+      version = "1.21.2"
     }
     digitalocean = {
       source = "digitalocean/digitalocean"

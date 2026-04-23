@@ -36,3 +36,17 @@ variable "doppler_token_fabric_dev" {
   description = "A token to authenticate with Doppler for the dev config"
   sensitive = true
 }
+
+# Define a variable so we can pass in our token
+variable "snmp_auth_passwd" {
+  type = string
+  description = "The SNMPv3 password for our dev devices."
+  sensitive = true
+}
+
+# Define a variable so we can pass in our token
+variable "snmp_enc_passwd" {
+  type = string
+  description = "The SNMPv3 encryption password for our dev devices."
+  sensitive = true
+}
